@@ -18,11 +18,16 @@ use UnitEnum;
 class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
-    protected static string|UnitEnum|null $navigationGroup = 'Human Resource Management';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
-    protected static null|int $navigationSort = 3;
 
-    protected static ?string $recordTitleAttribute = 'user.name';
+    protected static string|UnitEnum|null $navigationGroup =
+        'Human Resource Management';
+
+    protected static string|BackedEnum|null $navigationIcon =
+        Heroicon::OutlinedUsers;
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {

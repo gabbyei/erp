@@ -13,54 +13,20 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-
-            $table->string('name');
-
-            $table->foreignId('user_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
-
-            $table->foreignId('department_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->foreignId('position_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->string('address')->nullable();
-            $table->string('place_of_birth')->nullable();
-            $table->date('date_of_birth')->nullable();
-
-            $table->enum('gender', [
-                'male',
-                'female',
-                'other'
-            ])->nullable();
-
-            $table->enum('religion', [
-                'islam',
-                'christianity',
-                'catholic',
-                'hindu',
-                'buddhist',
-                'konghucu'
-            ])->nullable();
-
-            $table->string('phone_number')->nullable();
-            $table->integer('salary')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-
-            $table->enum('status', [
-                'applicant',
-                'active',
-                'trainee'
-            ])->default('active');
-
-            $table->string('image')->nullable();
-
+            $table->foreignId('user_id')->nullable->constrained();
+            $table->foreignId('department_id')->constrained();
+            $table->foreignId('position_id')->constrained();
+            $table->string('address')->nullable;
+            $table->string('pob')->nullable;
+            $table->date('dop')->nullable;
+            $table->enum('gender', ['male','female'])->nullable;
+            $table->enum('religion', ['islam','katolik','protestan','hindu','konghochu','Budha'])->nullable;
+            $table->string('phone_number')->nullable;
+            $table->integer('salary')->nullable;
+            $table->date('start_date')->nullable;
+            $table->date('end_date')->nullable;
+            $table->enum('status', ['applicant','active','trainee','x'])->nullable;
+            $table->string('image')->nullable;
             $table->timestamps();
         });
     }

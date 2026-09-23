@@ -18,8 +18,15 @@ use UnitEnum;
 class PositionResource extends Resource
 {
     protected static ?string $model = Position::class;
-    protected static string|UnitEnum|null $navigationGroup = 'Human Resource Management';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Briefcase;
+
+    protected static string|UnitEnum|null $navigationGroup =
+        'Human Resource Management';
+
+    protected static string|BackedEnum|null $navigationIcon =
+        Heroicon::OutlinedBriefcase;
+
+    // BUAT URUTAN DI SIDEBAR
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'name';
 
