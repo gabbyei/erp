@@ -25,14 +25,17 @@ class DepartmentForm
                         TextInput::make('description')
                             ->required(),
 
-                        TextInput::make('address'),
+                        TextInput::make('address')
+                            ->required(),
 
                         TextInput::make('email')
                             ->label('Email address')
-                            ->email(),
+                            ->email()
+                            ->required(),
 
                         TextInput::make('phone_number')
-                            ->tel(),
+                            ->tel()
+                            ->required(),
                     ]),
             ]);
     }

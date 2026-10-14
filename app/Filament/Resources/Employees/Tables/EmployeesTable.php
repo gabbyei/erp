@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\Employees\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -23,7 +25,7 @@ class EmployeesTable
                     ->circular()
                     ->size(45),
 
-                TextColumn::make('name')
+                TextColumn::make('user.name')
                     ->label('Employee')
                     ->searchable()
                     ->sortable(),
@@ -48,10 +50,11 @@ class EmployeesTable
                     ->color(fn (string $state): string => match ($state) {
                         'active' => 'success',
                         'inactive' => 'danger',
+                        'trainee' => 'warning',
+                        'applicant' => 'info',
                         default => 'gray',
                     }),
             ])
-
             ->filters([
                 SelectFilter::make('department_id')
                     ->label('Department')
@@ -64,15 +67,17 @@ class EmployeesTable
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options([
+                        'applicant' => 'Applicant',
+                        'trainee' => 'Trainee',
                         'active' => 'Active',
                         'inactive' => 'Inactive',
                     ]),
             ])
-
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make(),
             ])
-
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

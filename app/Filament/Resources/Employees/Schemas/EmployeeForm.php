@@ -18,6 +18,7 @@ class EmployeeForm
     {
         return $schema
             ->components([
+
                 Section::make('User Information')
                     ->icon(Heroicon::Users)
                     ->columnSpan(2)
@@ -28,18 +29,20 @@ class EmployeeForm
                                 TextInput::make('name')
                                     ->placeholder('Name')
                                     ->required(),
+
                                 TextInput::make('email')
                                     ->placeholder('Email Address')
                                     ->label('Email Address')
+                                    ->email()
                                     ->required(),
+
                                 TextInput::make('password')
                                     ->placeholder('Password')
                                     ->password()
-                                    ->required(fn(string $operation):bool => $operation === 'create')
+                                    ->required(fn (string $operation): bool => $operation === 'create')
                                     ->dehydrated(fn (?string $state): bool => filled($state)),
-                            ])
+                            ]),
                     ]),
-
 
                 Section::make('Profile Picture')
                     ->icon(Heroicon::Camera)
@@ -49,47 +52,48 @@ class EmployeeForm
                             ->image()
                             ->disk('public')
                             ->visibility('public')
-                            ->directory('employees')
+                            ->directory('employees'),
                     ]),
-
 
                 Section::make('Personal Information')
                     ->icon(Heroicon::UserPlus)
                     ->columns(3)
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->schema([
                         TextInput::make('pob')
                             ->columnSpan(2)
                             ->placeholder('Place of Birth')
                             ->label('Place of Birth'),
+
                         DatePicker::make('dob')
-                            ->label('Date of Birth')
-                            ->default('1990/01/01'),
+                            ->label('Date of Birth'),
+
                         Textarea::make('address')
                             ->placeholder('Address')
                             ->rows(3)
-                            ->extraInputAttributes(['style' => 'resize:none'])
                             ->columnSpanFull(),
+
                         Select::make('gender')
                             ->options([
-                                'male'      => 'Male',
-                                'female'    => 'Female'
+                                'male' => 'Male',
+                                'female' => 'Female',
                             ]),
+
                         Select::make('religion')
                             ->options([
-                                'islam'     => 'Islam',
-                                'katolik'   => 'Katolik',
+                                'islam' => 'Islam',
+                                'katolik' => 'Katolik',
                                 'protestan' => 'Protestan',
-                                'hindu'     => 'Hindu',
-                                'buddha'    => 'Buddha',
-                                'konghucu'  => 'Konghucu'
+                                'hindu' => 'Hindu',
+                                'buddha' => 'Buddha',
+                                'konghucu' => 'Konghucu',
                             ]),
+
                         TextInput::make('phone_number')
                             ->label('Phone Number')
                             ->placeholder('Phone Number')
-                            ->tel()
+                            ->tel(),
                     ]),
-
 
                 Section::make('Job Information')
                     ->icon(Heroicon::Briefcase)
@@ -97,23 +101,37 @@ class EmployeeForm
                     ->columnSpanFull()
                     ->schema([
                         Select::make('department_id')
-                            ->relationship('department', 'name'),
+                            ->relationship('department', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+
                         Select::make('position_id')
-                            ->relationship('position', 'name'),
+                            ->relationship('position', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+
                         TextInput::make('salary')
                             ->required()
                             ->numeric()
                             ->default(0),
+
                         Select::make('status')
                             ->options([
                                 'applicant' => 'Applicant',
-                                'trainee'   => 'Trainee',
-                                'active'    => 'Active',
-                                'inactive'  => 'Inactive'
-                            ]),
+                                'trainee' => 'Trainee',
+                                'active' => 'Active',
+                                'inactive' => 'Inactive',
+                            ])
+                            ->default('active')
+                            ->required(),
+
                         DatePicker::make('start_date'),
+
                         DatePicker::make('end_date'),
                     ]),
-            ])->columns(3);
+            ])
+            ->columns(3);
     }
 }

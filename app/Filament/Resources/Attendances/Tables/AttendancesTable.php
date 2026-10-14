@@ -14,7 +14,7 @@ class AttendancesTable
     {
         return $table
             ->columns([
-                TextColumn::make('employee.name')
+                TextColumn::make('employee.user.name')
                     ->label('Employee')
                     ->searchable()
                     ->sortable(),

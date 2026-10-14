@@ -23,9 +23,14 @@ class AttendanceForm
                         Select::make('employee_id')
                             ->label('Employee')
                             ->options(
-                                Employee::whereNotNull('name')
-                                    ->where('name', '!=', '')
-                                    ->pluck('name', 'id')
+                                Employee::query()
+                                    ->with('user')
+                                    ->get()
+                                    ->mapWithKeys(function (Employee $employee) {
+                                        return [
+                                            $employee->id => $employee->user->name,
+                                        ];
+                                    })
                                     ->toArray()
                             )
                             ->searchable()

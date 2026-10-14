@@ -13,20 +13,62 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable->constrained();
-            $table->foreignId('department_id')->constrained();
-            $table->foreignId('position_id')->constrained();
-            $table->string('address')->nullable;
-            $table->string('pob')->nullable;
-            $table->date('dop')->nullable;
-            $table->enum('gender', ['male','female'])->nullable;
-            $table->enum('religion', ['islam','katolik','protestan','hindu','konghochu','Budha'])->nullable;
-            $table->string('phone_number')->nullable;
-            $table->integer('salary')->nullable;
-            $table->date('start_date')->nullable;
-            $table->date('end_date')->nullable;
-            $table->enum('status', ['applicant','active','trainee','x'])->nullable;
-            $table->string('image')->nullable;
+
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained();
+
+            $table->foreignId('department_id')
+                ->constrained();
+
+            $table->foreignId('position_id')
+                ->constrained();
+
+            $table->string('address')
+                ->nullable();
+
+            $table->string('pob')
+                ->nullable();
+
+            $table->date('dob')
+                ->nullable();
+
+            $table->enum('gender', [
+                'male',
+                'female',
+            ])->nullable();
+
+            $table->enum('religion', [
+                'islam',
+                'katolik',
+                'protestan',
+                'hindu',
+                'konghucu',
+                'buddha',
+            ])->nullable();
+
+            $table->string('phone_number')
+                ->nullable();
+
+            $table->integer('salary')
+                ->nullable();
+
+            $table->date('start_date')
+                ->nullable();
+
+            $table->date('end_date')
+                ->nullable();
+
+            $table->enum('status', [
+                'applicant',
+                'active',
+                'trainee',
+                'inactive',
+            ])->nullable();
+
+            $table->string('image')
+                ->nullable();
+
             $table->timestamps();
         });
     }
