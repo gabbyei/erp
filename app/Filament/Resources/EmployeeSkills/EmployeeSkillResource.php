@@ -11,15 +11,22 @@ use App\Models\EmployeeSkill;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
+//use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class EmployeeSkillResource extends Resource
 {
     protected static ?string $model = EmployeeSkill::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|UnitEnum|null $navigationGroup =
+        'Human Resource Management';
+    
+    //protected static ?string $navigationParentItem = 'Employee Skills';
 
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
+    
     protected static ?string $recordTitleAttribute = 'expiry_date';
 
     public static function form(Schema $schema): Schema

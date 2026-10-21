@@ -16,17 +16,17 @@ class EmployeeSkillsTable
     {
         return $table
             ->columns([
-                TextColumn::make('employee_id')
-                    ->numeric()
+                TextColumn::make('employee.user.name')
+                    ->label('Nama Pegawai')
                     ->sortable(),
-                TextColumn::make('skill_type_id')
-                    ->numeric()
+                TextColumn::make('skillType.name')
+                    ->label('Kategori Skill')
                     ->sortable(),
-                TextColumn::make('skill_id')
-                    ->numeric()
+                TextColumn::make('skill.name')
+                    ->label('Skill')
                     ->sortable(),
-                TextColumn::make('skill_level_id')
-                    ->numeric()
+                TextColumn::make('skillLevel.name')
+                    ->label('Level Skill')
                     ->sortable(),
                 TextColumn::make('level_progress')
                     ->numeric()

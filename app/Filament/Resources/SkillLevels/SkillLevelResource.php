@@ -13,13 +13,18 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SkillLevelResource extends Resource
 {
     protected static ?string $model = SkillLevel::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|UnitEnum|null $navigationGroup =
+        'Human Resource Management';
 
+    protected static ?string $navigationParentItem = 'Employee Skills';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
